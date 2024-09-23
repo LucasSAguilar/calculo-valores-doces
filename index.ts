@@ -45,8 +45,8 @@ const adicionarIngredienteNaLista = () => {
 buttonAdd?.addEventListener("click", adicionarIngredienteNaLista);
 
 const carregarListaTela = () => {
-    const lista = document.getElementById("lista-ingredientes");
-  
+    const lista = document.getElementById("lista-ingredientes") as HTMLElement;
+    lista.innerHTML = "";
     listaIngredientes.forEach((ingrediente) => {
         const li = document.createElement("li");
 
@@ -66,6 +66,7 @@ const carregarListaTela = () => {
         li.appendChild(criarElementoP("R$" + ingrediente.custo_por_unidade.toFixed(2).toString()));
         
         lista?.appendChild(li);
+        exibirCustoFinal();
     });
   };
 
@@ -110,3 +111,8 @@ const defineCustoProduto = (listaIngredientes: Ingrediente[]): number => {
   return custoProduto;
 };
 
+const exibirCustoFinal = () => {
+  const HTMLCustoFinal = document.getElementById("custo-final") as HTMLInputElement;
+  const custoProduto = defineCustoProduto(listaIngredientes);
+  HTMLCustoFinal.textContent = "Valor do produto: R$" + custoProduto.toFixed(2).toString();
+}
