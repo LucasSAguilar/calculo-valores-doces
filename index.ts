@@ -21,6 +21,8 @@ const adicionarIngredienteNaLista = () => {
     "input-valor-pago"
   ) as HTMLInputElement;
 
+
+  
   const ingrediente: Ingrediente = {
     nome_ingrediente: nome.value,
     quantidade_comprada: Number(quantidadeComprada.value),
@@ -58,10 +60,10 @@ const carregarListaTela = () => {
         
         li.appendChild(criarElementoP(ingrediente.nome_ingrediente));
         li.appendChild(criarElementoP(ingrediente.quantidade_comprada.toString()));
-        li.appendChild(criarElementoP(ingrediente.valor_pago.toString()));
+        li.appendChild(criarElementoP("R$" + ingrediente.valor_pago.toString()));
         li.appendChild(criarElementoP(ingrediente.quantidade_usada_por_unidade.toString()));
-        li.appendChild(criarElementoP(ingrediente.quantidade_que_pode_ser_produzida.toString()));
-        li.appendChild(criarElementoP(ingrediente.custo_por_unidade.toString()));
+        li.appendChild(criarElementoP(ingrediente.quantidade_que_pode_ser_produzida.toFixed(2).toString()));
+        li.appendChild(criarElementoP("R$" + ingrediente.custo_por_unidade.toFixed(2).toString()));
         
         lista?.appendChild(li);
     });
@@ -108,13 +110,3 @@ const defineCustoProduto = (listaIngredientes: Ingrediente[]): number => {
   return custoProduto;
 };
 
-geraValoresRestantesIngrediente();
-
-// ======================
-
-console.log("=========== Valores ===========");
-console.log(`Valor do produto: R$${valor_produto}`);
-console.log(
-  `A margem de lucro é de ${porcentagem_lucro}%, gerando um lucro de R$${valor_lucro}`
-);
-console.log(`Valor do produto com lucro é: R$${valor_produto_com_lucro}`);
