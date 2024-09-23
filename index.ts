@@ -110,9 +110,18 @@ const defineCustoProduto = (listaIngredientes: Ingrediente[]): number => {
 
   return custoProduto;
 };
+const defineCustoProdutoComLucroDe30 = (listaIngredientes: Ingrediente[]): number => {
+  let custoProduto: number = 0;
+
+  listaIngredientes.forEach((ingrediente) => {
+    custoProduto = custoProduto + ingrediente.custo_por_unidade;
+  });
+
+  return custoProduto + (custoProduto * porcentagem_lucro) / 100;
+};
 
 const exibirCustoFinal = () => {
   const HTMLCustoFinal = document.getElementById("custo-final") as HTMLInputElement;
   const custoProduto = defineCustoProduto(listaIngredientes);
-  HTMLCustoFinal.textContent = "Valor do produto: R$" + custoProduto.toFixed(2).toString();
+  HTMLCustoFinal.textContent = "Valor do produto: R$" + custoProduto.toFixed(2).toString() + " | Valor com lucro de 30%: R$" + defineCustoProdutoComLucroDe30(listaIngredientes).toFixed(2).toString();
 }
