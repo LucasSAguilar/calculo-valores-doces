@@ -1,23 +1,73 @@
-const listaIngredientes: Ingrediente[] = [
-  {
-    nome_ingrediente: "Farinha",
-    quantidade_comprada: 1000,
-    valor_pago: 5,
-    quantidade_usada_por_unidade: 100,
-    // Gerado
+let porcentagem_lucro: number = 30;
+let valor_produto: number = 0;
+let valor_lucro: number = 0;
+let valor_produto_com_lucro: number = 0;
+const listaIngredientes: Ingrediente[] = [];
+const buttonAdd = document.getElementById("button-add");
+// ================================================
+// ================================================
+// ================================================
+
+const adicionarIngredienteNaLista = () => {
+    
+  const nome = document.getElementById("input-nome") as HTMLInputElement;
+  const quantidadeComprada = document.getElementById(
+    "input-quantidade-comprada"
+  ) as HTMLInputElement;
+  const quantidadeUsadaPorUnidade = document.getElementById(
+    "input-quantidade-usada-por-unidade"
+  ) as HTMLInputElement;
+  const valorPago = document.getElementById(
+    "input-valor-pago"
+  ) as HTMLInputElement;
+
+  const ingrediente: Ingrediente = {
+    nome_ingrediente: nome.value,
+    quantidade_comprada: Number(quantidadeComprada.value),
+    quantidade_usada_por_unidade: Number(quantidadeUsadaPorUnidade.value),
+    valor_pago: Number(valorPago.value),
     quantidade_que_pode_ser_produzida: 0,
     custo_por_unidade: 0,
-  },
-  {
-    nome_ingrediente: "Leite",
-    quantidade_comprada: 1000,
-    valor_pago: 8,
-    quantidade_usada_por_unidade: 200,
-    // Gerado
-    quantidade_que_pode_ser_produzida: 0,
-    custo_por_unidade: 0,
-  },
-];
+  };
+
+  listaIngredientes.push(ingrediente);
+
+  nome.value = "";
+  quantidadeComprada.value = "";
+  quantidadeUsadaPorUnidade.value = "";
+  valorPago.value = "";
+  geraValoresRestantesIngrediente();
+  carregarListaTela();
+};
+
+buttonAdd?.addEventListener("click", adicionarIngredienteNaLista);
+
+const carregarListaTela = () => {
+    const lista = document.getElementById("lista-ingredientes");
+  
+    listaIngredientes.forEach((ingrediente) => {
+        const li = document.createElement("li");
+
+        const criarElementoP = (conteudo: string) => {
+          const p = document.createElement("p");
+          p.className = "dados-item-lista";
+          p.textContent = conteudo;
+          return p;
+        };
+        console.log(ingrediente.valor_pago);
+        
+        li.appendChild(criarElementoP(ingrediente.nome_ingrediente));
+        li.appendChild(criarElementoP(ingrediente.quantidade_comprada.toString()));
+        li.appendChild(criarElementoP(ingrediente.valor_pago.toString()));
+        li.appendChild(criarElementoP(ingrediente.quantidade_usada_por_unidade.toString()));
+        li.appendChild(criarElementoP(ingrediente.quantidade_que_pode_ser_produzida.toString()));
+        li.appendChild(criarElementoP(ingrediente.custo_por_unidade.toString()));
+        
+        lista?.appendChild(li);
+    });
+  };
+
+// ======================
 
 const defineQuantidadeQuePodeSerProduzida = (
   quantidadeComprada: number,
@@ -46,7 +96,6 @@ const geraValoresRestantesIngrediente = () => {
       ingrediente.quantidade_que_pode_ser_produzida
     );
   });
-  
 };
 
 const defineCustoProduto = (listaIngredientes: Ingrediente[]): number => {
@@ -61,16 +110,11 @@ const defineCustoProduto = (listaIngredientes: Ingrediente[]): number => {
 
 geraValoresRestantesIngrediente();
 
-const porcentagem_lucro = 30;
-const valor_produto: number = defineCustoProduto(listaIngredientes);
-const valor_lucro: number = 
-  (valor_produto / 100) * porcentagem_lucro;
-const valor_produto_com_lucro: number = valor_produto + valor_lucro;
 // ======================
 
 console.log("=========== Valores ===========");
 console.log(`Valor do produto: R$${valor_produto}`);
-console.log(`A margem de lucro é de ${porcentagem_lucro}%, gerando um lucro de R$${valor_lucro}`);
 console.log(
-  `Valor do produto com lucro é: R$${valor_produto_com_lucro}`
+  `A margem de lucro é de ${porcentagem_lucro}%, gerando um lucro de R$${valor_lucro}`
 );
+console.log(`Valor do produto com lucro é: R$${valor_produto_com_lucro}`);

@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <link rel="stylesheet" href="styles/global.css" />
   <body>
-    <header class="header-lista">
-      <p>Nome</p>
-      <p>Qnt Comprada</p>
-      <p>Valor pago</p>
-      <p>Qnt usada por unidade</p>
-      <p>Unidades produzidas</p>
-      <p>Custo por unidade</p>
-    </header>
-    <ul class="lista-ingredientes"></ul>
-    <footer class="footer-produto">Valor do produto: R$00,00</footer>
-</body>
+    <div class="container-lista">
+      <header class="header-lista">
+        <p class="item-header">Nome</p>
+        <p>Qnt Comprada</p>
+        <p>Valor pago</p>
+        <p>Qnt usada por unidade</p>
+        <p>Unidades produzidas</p>
+        <p>Custo por unidade</p>
+      </header>
+      <ul class="lista-ingredientes" id="lista-ingredientes"></ul>
+      <footer class="footer-produto">Valor do produto: R$00,00</footer>
+    </div>
+    <!-- ============================ -->
+    <div class="container-form">
+      <form>
+        <div class="container-input">
+          <label>Nome</label>
+          <input type="text" id="input-nome"/>
+        </div>
+        <div class="container-input">
+          <label>Quantidade comprada</label>
+          <input type="number" id="input-quantidade-comprada"/>
+        </div>
+        <div class="container-input">
+          <label>Valor pago</label>
+          <input type="number" id="input-valor-pago"/>
+        </div>
+        <div class="container-input" id="input-quantidade-usada-por-unidade">
+          <label>Quantidade usada por unidade</label>
+          <input type="number" />
+        </div>
+        <button type="button" id="button-add">Adicionar</button>
+      </form>
+    </div>
+  </body>
   <script src="dist/index.js"></script>
 </html>
